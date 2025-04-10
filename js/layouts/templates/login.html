@@ -1,0 +1,28 @@
+<div class="content screen">
+    <div x-data="loginComponent">
+      <div class="card shadow" style="width: 20rem;">
+        <img class="card-img-top pt-4 px-4 mb-2" src="/assets/images/logo.png">
+        <div class="card-title text-center fw-bold fs-5 mt-3">Iniciar Sesión</div>
+        
+        <form @submit.prevent="login">
+          <div class="card-body px-4">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input class="form-control" id="email" x-model="email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" x-model="password">
+            </div>
+            
+            <!-- Solo mostrar si hay error -->
+            <div x-show="error" class="alert alert-danger" x-text="error"></div>
+          </div>
+  
+          <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4 mt-2">
+            <button type="submit" class="btn btn-primary" style="width: 7rem">Ingresar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
