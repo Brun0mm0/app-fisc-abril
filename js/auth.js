@@ -5,10 +5,10 @@ document.addEventListener('alpine:init', () => {
 
         async login(email, password) {
             try {
-            const res = await api.post('/auth/login', { email, password });
+            const res = await api.post('/api/login', { email, password });
             this.token = res.data.token;
             localStorage.setItem('token', this.token);
-            this.user = res.data.user;
+            this.user = {user: email, roles: ['admin']}; // Simulación de roles
             localStorage.setItem('user', JSON.stringify(this.user));
             return true;
             } catch (error) {   

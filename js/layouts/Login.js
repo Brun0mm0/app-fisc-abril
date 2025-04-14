@@ -1,12 +1,14 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('loginComponent', () => ({
-      email: 'Bruno',
-      password: 'Provenzano',
+      email: 'eve.holt@reqres.in',
+      password: 'cityslicka',
       error: '',
   
       async login() {
-        if (this.email === 'Bruno' && this.password === 'Provenzano') {
-          window.location.hash = '#/dashboard';
+        if (this.email === 'eve.holt@reqres.in' && this.password === 'cityslicka') {
+          const alpineAuth = Alpine.store('auth');
+          await alpineAuth.login(this.email, this.password);
+          window.location.hash = '#/dashboard/procesar-archivo';
         } else {
           this.error = 'Credenciales incorrectas';
         }

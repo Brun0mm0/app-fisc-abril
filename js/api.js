@@ -1,5 +1,6 @@
 const api = axios.create({
-  baseURL: 'http://130.130.2.53:9096',
+  // baseURL: 'http://130.130.2.53:9096',
+  baseURL: 'https://reqres.in',
   Headers: {
     'Content-Type': 'application/json',
   }
