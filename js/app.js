@@ -2,6 +2,7 @@ document.addEventListener('alpine:init', () => {
 
     Alpine.data('app', () => ({
         view: '',
+
         async init() {
             window.addEventListener('hashchange', this.routeChange.bind(this));
             await this.routeChange();
@@ -22,7 +23,7 @@ document.addEventListener('alpine:init', () => {
             
             const auth = Alpine.store('auth');
             if(!route.public) {
-                if(!auth.isAuthenticated()) {
+                if(!auth.chechkOut()) {
                     window.location.hash = '#/login';
                     return;
                 }

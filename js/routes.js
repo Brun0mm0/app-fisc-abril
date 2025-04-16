@@ -11,7 +11,7 @@ window.routes = {
         templateUrl: '/js/layouts/templates/dashboard.html',
         script: '/js/layouts/dashboard.js',
         public: false,
-        roles: ['admin', 'user'],
+        roles: ['admin', 'user','personal'],
         title: 'Dashboard',
     },
     '/admin' : {

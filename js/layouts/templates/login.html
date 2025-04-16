@@ -8,19 +8,31 @@
           <div class="card-body px-4">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input class="form-control" id="email" x-model="email">
+              <input 
+                class="form-control"
+                :class="{ 'is-invalid': error }" 
+                id="email" 
+                x-model="email"
+                @input="limpiarError"
+                >
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password" x-model="password">
+              <input 
+                type="password" 
+                class="form-control"
+                :class="{ 'is-invalid': error }"
+                id="password" 
+                x-model="password"
+                @input="limpiarError"
+                >
             </div>
-            
-            <!-- Solo mostrar si hay error -->
-            <div x-show="error" class="alert alert-danger" x-text="error"></div>
-          </div>
   
           <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4 mt-2">
-            <button type="submit" class="btn btn-primary" style="width: 7rem">Ingresar</button>
+            <button type="submit" class="btn btn-primary" style="width: 7rem" :disabled="processing">
+              <span x-show="!processing">Ingresar</span>
+              <span x-show="processing"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></span>
+            </button>
           </div>
         </form>
       </div>

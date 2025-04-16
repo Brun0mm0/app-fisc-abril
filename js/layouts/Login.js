@@ -1,17 +1,31 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('loginComponent', () => ({
-      email: 'eve.holt@reqres.in',
-      password: 'cityslicka',
-      error: '',
+      email: 'bprovenzano',
+      password: 'XEWj$)=[=~OY',
+      error: false,
+      processing: false,
   
       async login() {
-        if (this.email === 'eve.holt@reqres.in' && this.password === 'cityslicka') {
-          const alpineAuth = Alpine.store('auth');
-          await alpineAuth.login(this.email, this.password);
-          window.location.hash = '#/dashboard/procesar-archivo';
-        } else {
-          this.error = 'Credenciales incorrectas';
-        }
-      }
+        if(this.processing) return; // Evita múltiples envíos
+
+          this.processing = true;
+
+          try {
+            const alpineAuth = Alpine.store('auth');
+            await alpineAuth.login(this.email, this.password)
+            window.location.hash = '#/dashboard/procesar-archivo';
+          } catch (error) {
+            this.error = true;
+            // throw
+            window.dispatchEvent(new CustomEvent('api-error', { detail: { mensaje: 'Error de autenticación', status: 401 } }));
+            // console.error('Error de autenticación:', error);
+          } finally {
+            this.processing = false;
+          }
+        },
+
+        limpiarError() {
+          this.error = false;
+        },
     }));
   });

@@ -1,9 +1,25 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('dashboardComponent', () => ({
-    subview: '',
 
     async init() {
       const section = this.getSectionFromHash();
+
+      const scriptUrl = `/js/components/scripts/${section}.js`; // corregí el path con `/` inicial
+
+      await this.loadScript(scriptUrl); // ✅ Cargar el script correspondiente
+      await this.loadSubview(section); // ✅ Cargar la vista correspondiente
+      // insertar scripts
+      // if (!document.querySelector(`script[src="${scriptUrl}"]`)) {
+      //   await new Promise((resolve, reject) => {
+      //     const script = document.createElement('script');
+      //     script.src = scriptUrl;
+      //     script.defer = true;
+      //     script.onload = resolve;
+      //     script.onerror = reject;
+      //     document.body.appendChild(script);
+      //   })
+      // }
+
       await this.loadSubview(section);
 
       window.addEventListener('hashchange', async () => {
@@ -20,30 +36,28 @@ document.addEventListener('alpine:init', () => {
     async navigate(section) {
       window.location.hash = `#/dashboard/${section}`;
     },
-
+    
     async loadSubview(section) {
+
+      const res = await fetch(`/js/components/templates/${section}.template.html`);
+      const html = await res.text();
+      
       const container = document.querySelector('.content');
+      container.innerHTML = html; // ✅ Volcar el contenido en el DOM
 
-      try {
-        const res = await fetch(`/js/components/templates/${section}.template.html`);
-        const html = await res.text();
+      // await this.loadScript(`/js/components/scripts/${section}.js`); // ✅ Cargar el script correspondiente
 
-        container.innerHTML = html; // ✅ Volcar el contenido en el DOM
-        this.subview = html; // Opcional, si querés conservarlo en estado
+        Alpine.initTree(container); // ✅ Inicializar Alpine en el nuevo contenido
+    },
 
-        // insertar scripts
-        const scriptUrl = `/js/components/scripts/${section}.js`; // corregí el path con `/` inicial
-        if (!document.querySelector(`script[src="${scriptUrl}"]`)) {
-          const script = document.createElement('script');
-          script.src = scriptUrl;
-          script.defer = true;
-          document.body.appendChild(script);
-        }
-
-      } catch (err) {
-        console.error(err);
-        container.innerHTML = `<h2 class="text-danger">Sección no encontrada</h2>`; // ✅ mensaje visible
-      }
+    loadScript(scriptUrl) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = scriptUrl;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
     },
 
     async logout() {

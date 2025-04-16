@@ -15,8 +15,17 @@
     <template x-if="view">
       <div x-html="view"></div>
     </template>
+    <div id="toastError" class="toast align-items-center bg-danger-subtle text-danger border border-danger position-fixed top-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastErrorMessage">
+          <!-- Mensaje de error se insertará acá -->
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
   </div>
-    
+</div>
+  
     <!-- Alpine JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Axios -->
@@ -36,6 +45,7 @@
 <script src="js/routes.js"></script>
 
 <!-- App principal -->
+<script src="js/main.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
