@@ -60,6 +60,13 @@ document.addEventListener('alpine:init', () => {
       });
     },
 
+    descargarRecibo() {
+      const formData = new FormData();
+      formData.append('archivo', this.file);
+
+      console.log(formData.getAll());
+    },
+
     async logout() {
       const alpineAuth = Alpine.store('auth');
       alpineAuth.logout();

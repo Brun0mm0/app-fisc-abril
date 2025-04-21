@@ -6,22 +6,25 @@ document.addEventListener('alpine:init', () => {
       processing: false,
   
       async login() {
-        if(this.processing) return; // Evita múltiples envíos
+        // await alpineAuth.login(this.email, this.password)
+        localStorage.setItem('user', JSON.stringify({ user: 'dev', roles: ['admin'] }))
+        window.location.hash = '#/dashboard/procesar-archivo';
+        // if(this.processing) return; // Evita múltiples envíos
 
-          this.processing = true;
+        //   this.processing = true;
 
-          try {
-            const alpineAuth = Alpine.store('auth');
-            await alpineAuth.login(this.email, this.password)
-            window.location.hash = '#/dashboard/procesar-archivo';
-          } catch (error) {
-            this.error = true;
-            // throw
-            window.dispatchEvent(new CustomEvent('api-error', { detail: { mensaje: 'Error de autenticación', status: 401 } }));
-            // console.error('Error de autenticación:', error);
-          } finally {
-            this.processing = false;
-          }
+        //   try {
+        //     const alpineAuth = Alpine.store('auth');
+        //     await alpineAuth.login(this.email, this.password)
+        //     window.location.hash = '#/dashboard/procesar-archivo';
+        //   } catch (error) {
+        //     this.error = true;
+        //     // throw
+        //     window.dispatchEvent(new CustomEvent('api-error', { detail: { mensaje: 'Error de autenticación', status: 401 } }));
+        //     // console.error('Error de autenticación:', error);
+        //   } finally {
+        //     this.processing = false;
+        //   }
         },
 
         limpiarError() {

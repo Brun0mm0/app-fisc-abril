@@ -6,6 +6,16 @@
       <hr>
       <form id="formularioCrearUsuario" @submit.prevent="gestionUsuario">
         
+        <!-- FIXME: Cuil -->
+        <div class="row align-items-center mb-2">
+          <div class="col-3">
+            <label for="cuil" class="col-form-label">Cuil</label>
+          </div>
+          <div class="col">
+            <input id="cuil" type="text" class="form-control" placeholder="Ingrese cuil">
+          </div>
+        </div>
+
         <!-- FIXME: Usuario -->
         <div class="row align-items-center mb-2">
           <div class="col-3">
@@ -26,25 +36,16 @@
           </div>
         </div>
         
-        <!-- FIXME: Cuil -->
-        <div class="row align-items-center mb-2">
-          <div class="col-3">
-            <label for="cuil" class="col-form-label">Cuil</label>
-          </div>
-          <div class="col">
-            <input id="cuil" type="text" class="form-control" placeholder="Ingrese cuil">
-          </div>
-        </div>
         
         <!-- FIXME: Contraseña -->
-        <div class="row align-items-center mb-2">
+        <!-- <div class="row align-items-center mb-2">
           <div class="col-3">
             <label for="pass" class="col-form-label" >Contraseña</label>
           </div>
           <div class="col">
             <input id="pass" type="text" class="form-control" placeholder="Ingrese una Contraseña">
           </div>
-        </div>
+        </div> -->
         
         <!-- FIXME: Rol -->
         <div class="row align-items-center mb-2">

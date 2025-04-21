@@ -14,13 +14,16 @@ document.addEventListener('alpine:init', () => {
             }},
 
         async chechkOut() {
-            try {
-                const res = await api.get('/index/login');
+            // HACK: Dev mode
+                this.user = JSON.parse(localStorage.getItem('user')) || { user: 'dev', roles: ['admin'] };
                 return true;
-            } catch (error) {   
-                throw new Error('Logout incorrecto.');
-                window.location.hash = '#/login';
-            }},
+            // try {
+            //     const res = await api.get('/index/login');
+            //     return true;
+            // } catch (error) {   
+            //     throw new Error('Logout incorrecto.');
+            //     window.location.hash = '#/login'; }
+        },
         
 
         // logout() {
